@@ -1,0 +1,65 @@
+building syntax tree...
+Function declaration: int main
+	Variable declaration: int a
+	Variable declaration: int b
+	Op: =
+		ID: a
+		Op: =
+			ID: b
+			const: 1.000000
+	if
+		Op: ==
+			ID: a
+			const: 1.000000
+		Op: =
+			ID: b
+			const: 2.000000
+		Op: =
+			ID: a
+			Op: +
+				ID: b
+				const: 1.000000
+
+constructing symbol table...
+
+type checking...
+All OK!
+           Scope        Variable Name     Type     Location    Line Numbers
+       -------------    -------------    ------    --------    ------------
+            global             main        int           0       1 
+              main                a        int           1       2   3   4   8 
+              main                b        int           2       2   3   5   8 
+
+generating p-code...
+;--------- c-++ P-code generating ---------
+;start of function 'int main(...)' declaration
+	ent 	main
+;declaration: int a
+;declaration: int b
+	lda 	a
+	lda 	b
+	ldcf	1.000000
+	stn
+	sto
+;start of if statement
+;if conditions
+	lod 	a
+	ldcf	1.000000
+	equ 	;equal expression
+	fjp 	L1
+;if statements
+	lda 	b
+	ldcf	2.000000
+	sto
+	ujp 	L2
+	lab 	L1
+;else statements
+	lda 	a
+	lod 	b
+	ldcf	1.000000
+	adi 	;integer add
+	sto
+	lab 	L2
+;end of if statement
+	ret
+;end of function 'int main(...)' declaration

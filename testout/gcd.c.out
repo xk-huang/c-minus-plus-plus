@@ -1,0 +1,102 @@
+building syntax tree...
+Function declaration: int gcd
+	parameter: int v
+	parameter: int u
+	if
+		Op: ==
+			ID: v
+			const: 0.000000
+		return
+			ID: u
+		return
+			call gcd(), args:
+				Op: -
+					ID: u
+					Op: *
+						Op: /
+							ID: u
+							ID: v
+						ID: v
+				ID: v
+Function declaration: void main
+	Variable declaration: int x
+	Variable declaration: int y
+	call read(), args:
+		ID: x
+	call read(), args:
+		ID: y
+	call write(), args:
+		call gcd(), args:
+			ID: y
+			ID: x
+
+constructing symbol table...
+
+type checking...
+All OK!
+           Scope        Variable Name     Type     Location    Line Numbers
+       -------------    -------------    ------    --------    ------------
+            global             main       void           3      13 
+               gcd                u        int           2       4   7   9   9 
+               gcd                v        int           1       4   6   9   9   9 
+              main                x        int           4      15  16  18 
+              main                y        int           5      15  17  18 
+            global              gcd        int           0       4   9  18 
+
+generating p-code...
+;--------- c-++ P-code generating ---------
+;start of function 'int gcd(...)' declaration
+	ent 	gcd
+;parameter: 'int v'
+;parameter: 'int u'
+;start of if statement
+;if conditions
+	lod 	v
+	ldcf	0.000000
+	equ 	;equal expression
+	fjp 	L1
+;if statements
+;return statement
+	lod 	u
+	ret
+	ujp 	L2
+	lab 	L1
+;else statements
+;return statement
+;call 'gcd(...)'
+	mst
+	lod 	u
+	lod 	u
+	lod 	v
+	dvi 	;integer div
+	lod 	v
+	mpi 	;integer mul
+	sbi 	;integer sub
+	lod 	v
+	cup 	gcd
+;end of call 'gcd(...)'
+	ret
+	lab 	L2
+;end of if statement
+	ret
+;end of function 'int gcd(...)' declaration
+;start of function 'void main(...)' declaration
+	ent 	main
+;declaration: int x
+;declaration: int y
+;read
+	lda 	x
+	rdi	;read an integer from terminal
+;read
+	lda 	y
+	rdi	;read an integer from terminal
+;write
+;call 'gcd(...)'
+	mst
+	lod 	y
+	lod 	x
+	cup 	gcd
+;end of call 'gcd(...)'
+	wri	;output an integer to terminal
+	ret
+;end of function 'void main(...)' declaration

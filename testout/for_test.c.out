@@ -1,0 +1,75 @@
+building syntax tree...
+Function declaration: void main
+	Variable declaration: int i
+	Variable declaration: int j
+	Op: =
+		ID: j
+		const: 10.000000
+	Op: =
+		ID: i
+		const: 0.000000
+	while
+		Op: <
+			ID: i
+			const: 10.000000
+		Op: =
+			ID: j
+			Op: +
+				ID: j
+				const: 1.000000
+		Op: =
+			ID: i
+			Op: +
+				ID: i
+				const: 1.000000
+	call write(), args:
+		ID: j
+
+constructing symbol table...
+
+type checking...
+All OK!
+           Scope        Variable Name     Type     Location    Line Numbers
+       -------------    -------------    ------    --------    ------------
+            global             main       void           0       1 
+              main                i        int           1       3   5   5   5   5 
+              main                j        int           2       3   4   5   5   6 
+
+generating p-code...
+;--------- c-++ P-code generating ---------
+;start of function 'void main(...)' declaration
+	ent 	main
+;declaration: int i
+;declaration: int j
+	lda 	j
+	ldcf	10.000000
+	sto
+	lda 	i
+	ldcf	0.000000
+	sto
+;start of while statement
+	lab 	L1
+;while conditions
+	lod 	i
+	ldcf	10.000000
+	les 	;less than expression
+	fjp 	L2
+;while statements
+	lda 	j
+	lod 	j
+	ldcf	1.000000
+	adi 	;integer add
+	sto
+	lda 	i
+	lod 	i
+	ldcf	1.000000
+	adi 	;integer add
+	sto
+	ujp 	L1
+	lab 	L2
+;end of while statement
+;write
+	lod 	j
+	wri	;output an integer to terminal
+	ret
+;end of function 'void main(...)' declaration

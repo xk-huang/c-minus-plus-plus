@@ -1,0 +1,5 @@
+*.o
+compiler
+*.sh
+.DS_Store
+/.vscode
