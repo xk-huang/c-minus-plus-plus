@@ -2,6 +2,8 @@
 
 C Minus Plus Plus (c-++), a C minus compiler with more C features.
 
+A course project for "BNU Compiler Theory Course 2019".
+
 # English README
 
 ## 1. Environment and Usage
@@ -26,27 +28,31 @@ C Minus Plus Plus (c-++), a C minus compiler with more C features.
 
 ### 1.2 Usage
 
-1. Compile `c-++` compiler, ignore `warning`, output `compiler` executive file:
+1. Compiler Rebuilding:
 
   ```shell
   make clean
   make
   ```
 
-2. `compiler` uses std I/O:
+2. Compiler Usage:
 
   ```shell
   ./compiler < [input file path] > [output file path]
   #e.g.: ./parser < ./testfile/gcd.c > ./testout/gcd.out
   ```
 
-3. run `test.sh` to test `compiler`, inputs are in `./testfile/`, and outputs are in `./testout/`:
+3. Run `test.sh` script to test the `compiler`. The inputs are in `./testfile/`, while the outputs are in `./testout/`:
 
   ```shell
   sh ./test.sh
   ```
 
 # 中文版
+
+C Minus Plus Plus (c-++), 又一个 C minus 编译器（添加更多 C 特性）。
+
+北京师范大学“编译原理”课程项目 (2019)。
 
 ## 1. 开发环境及运行方法
 
